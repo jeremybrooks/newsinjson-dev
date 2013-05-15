@@ -5,6 +5,7 @@ ninja.uri
 ninja.content.body
 ninja.content.encoding.html
 
+
 var ninja = {   
     "uri" : "http://www.example.com/articles/sherlock.json",
     "__uricomment" : "the uri identifier for this NINJA document - recommend use of actual http URLs",
