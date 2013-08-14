@@ -3,8 +3,18 @@
 	"id" : "http://www.iptc.org/std-dev/ninjs/ninjs-schema_201307a.json#",
 	"type" : "object",
 	"title" : "IPTC ninjs - News in JSON",
-	"description" : "A news object as JSON object $$comment: as of 2013-07-17, edited by MS // **strict** version ",
+	"description" : "A news object as JSON object $$comment: as of 2013-07-18, edited by MS // **strict** version ",
 	"additionalProperties" : false,
+	"patternProperties" : {
+		"description_[a-z0-9]+" : {
+		"description" : "A free-form textual description of the content of the item",
+		"type" : "string"
+		},
+		"body_[a-z0-9]+" : {
+		"description" : "The textual content of the news object",
+		"type" : "string"
+		}
+	},
 	"properties" : {
 		"uri" : {
 			"description" : "The identifier for this news object",
@@ -33,6 +43,24 @@
 			"description" : "The date and time when this version of the news object was created",
 			"type" : "string",
 			"format" : "date-time"
+		},
+		"embargoed" : {
+			"description" : "The date and time before which all versions of the news object are embargoed. If absent, this object is not embargoed.",
+			"type" : "string",
+			"format" : "date-time"
+		},
+		"pubstatus" : {
+			"descripton" : "The publishing status of the news object, its value is *usable* by default.",
+			"type" : "string",
+			"enum" : ["usable", "withheld", "canceled"]
+		},
+		"copyrightholder" : {
+			"description" : "The person or organisation claiming the intellectual property for the content.",
+			"type" : "string"
+		},
+		"copyrightnotice" : {
+			"description" : "Any necessary copyright notice for claiming the intellectual property for the content.",
+			"type" : "string"
 		},
 		"language" : {
 			"description" : "The human language used by the content. The value should follow IETF BCP47",
@@ -279,7 +307,7 @@
 			"description" : "Wrapper for different renditions of non-textual content of the news object",
 			"type" : "object",
 			"patternProperties" : {
-				"[TBD: regex for the names]" : {
+				"psr_[a-z0-9]+" : {
 					"description" : "A specific rendition of a non-textual content of the news object",
 					"type" : "object",
 					"properties" : {
@@ -316,7 +344,7 @@
 			"description" : "Content of news objects which are associated with this news object",
 			"type" : "object",
 			"patternProperties" : {
-				"[TBD: regex for the names]" :  { "$ref": "http://www.iptc.org/std-dev/ninjs/ninjs-schema_201307a.json#" }
+				"psa_[a-z0-9]+" :  { "$ref": "http://www.iptc.org/std-dev/ninjs/ninjs-schema_201307a.json#" }
 			}
 		}
 	}
